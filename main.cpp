@@ -9,12 +9,12 @@ struct competidor
   int tirosCentro, tirosNoCentro;
 };
 
-void menu();
+void menu(int &opcion);
 
 int main()
 {
   int opcion = 1;
-  std::ifstream
+  std::ifstream insciptos("inscriptos.txt");
 }
 
 void menu(int &opcion)
@@ -24,11 +24,11 @@ void menu(int &opcion)
     std::cout << "\tMENU PRINCIPAL:" << '\n';
     std::cout << "\t\t1. Competidores inscriptos." << '\n';
     std::cout << "\t\t2. Mostrar puntaje de competidores." << '\n';
-    std::cout << "\t\t3. Exportar puntajes (.txt)"
+    std::cout << "\t\t3. Exportar puntajes (.txt)" << '\n';
     std::cout << "\t\t4. Filtrar competidores por un puntaje maximo." << '\n';
     std::cout << "\t\t5. Mostrar cantidad de competidores por categoria y subcategoria." << '\n';
     std::cout << "\t\t6. Salir." << '\n';
     std::cout << "\tSeleccione una opcion (1 - 6): " << '\n';
-    std::cin << opcion;
+    std::cin >> opcion;
   }
 }
