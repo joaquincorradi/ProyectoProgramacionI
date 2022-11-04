@@ -10,12 +10,14 @@ struct competidor
 };
 
 void menu(int &opcion);
+void asignar(competidor datos[20], std::ifstream inscriptos);
 void opcion1(std::ifstream &inscriptos);
 void opcion2();
 
 int main()
 {
   int opcion = 1;
+  competidor datos[20];
   std::ifstream inscriptos("inscriptos.txt");
   opcion1(inscriptos);
 }
@@ -33,6 +35,32 @@ void menu(int &opcion)
     std::cout << "\t\t6. Salir." << '\n';
     std::cout << "\tSeleccione una opcion (1 - 6): " << '\n';
     std::cin >> opcion;
+  }
+}
+
+void asignar(competidor datos[20], std::ifstream inscriptos)
+{
+  int contador, contador2;
+  std::string temp, temp2;
+  while (inscriptos >> temp)
+  {
+    ++contador;
+    if (contador > 6)
+    {
+      inscriptos >> temp2;
+      datos[contador2].numeroDeInscripcion = temp2;
+      inscriptos >> temp2;
+      datos[contador2].nombre = temp2;
+      inscriptos >> temp2;
+      datos->categoria[contador2] = temp2;
+      inscriptos >> temp2;
+      datos->subcategoria[contador2] = temp2;
+      inscriptos >> temp2;
+      datos->tirosCentro[contador2] = temp2;
+      inscriptos >> temp2;
+      datos->tirosNoCentro[contador2] = temp2;
+      ++contador2;
+    }
   }
 }
 
