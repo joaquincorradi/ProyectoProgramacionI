@@ -19,6 +19,7 @@ void menu(int &opcion);
 void opcion1(competidor datos[20]);
 void opcion2(competidor datos[20], int puntajes[20]);
 void opcion4(competidor datos[20], int puntajes[20]);
+void opcion5(competidor datos[20], int categoriasMatrix[2][2]);
 
 int main()
 {
@@ -26,6 +27,7 @@ int main()
   int opcion = 1;
   asignar(datos);
   int puntajes[20];
+  int categoriasMatrix[2][2];
 }
 
 void asignar(competidor datos[20])
@@ -55,7 +57,7 @@ void menu(int &opcion)
   std::cout << "\t\t2. Mostrar puntaje de competidores." << '\n'; //terminada y chequeada
   std::cout << "\t\t3. Exportar puntajes (.txt)" << '\n'; //falta hacer
   std::cout << "\t\t4. Filtrar competidores por un puntaje maximo." << '\n'; //terminado y chequeado, no a prueba de usuario tonto
-  std::cout << "\t\t5. Mostrar cantidad de competidores por categoria y subcategoria." << '\n'; //falta hacer
+  std::cout << "\t\t5. Mostrar cantidad de competidores por categoria y subcategoria." << '\n'; //en proceso...
   std::cout << "\t\t6. Salir." << '\n';
   std::cout << "\tSeleccione una opcion (1 - 6): " << '\n';
   std::cin >> opcion; 
@@ -66,7 +68,7 @@ void opcion1(competidor datos[20])
   std::cout << '\n';
   std::cout << "Los competidores inscriptos son los siguientes: ";
   std::cout << '\n';
-  for (int i = 0; i <= 20; ++i)
+  for (int i = 0; i <= 20; ++i) //testear si menor en lugar de menor e igual funciona igual, creo que esta de mas
   {
     std::cout << datos[i].nombre << '\n';
   }
@@ -109,4 +111,38 @@ void opcion4(competidor datos[20], int puntajes[20])
     }
   }
   std::cout << '\n';
+}
+
+void opcion5(competidor datos[20], int categoriasMatrix[2][2])
+{
+  int categ0, categ1, categ2;
+  int subCateg0, subCateg1, subCateg2;
+  for (int i = 0; i < 20; ++i) //lo siguiente pienso que esta hardcodeado, pero no se ocurre otra forma de hacerlo. Igualmente esta bien
+  {
+    if (datos[i].categoria == 0)
+    {
+      ++categ0;
+    }
+    else if (datos[i].categoria == 1)
+    {
+      ++categ1;
+    }
+    else if (datos[i].categoria == 2)
+    {
+      ++categ2;
+    }
+
+    if (datos[i].subcategoria == 0)
+    {
+      ++subCateg0;
+    }
+    else if (datos[i].subcategoria == 1)
+    {
+      ++subCateg1;
+    }
+    else if (datos[i].subcategoria == 2)
+    {
+      ++subCateg2;
+    }
+  }
 }
