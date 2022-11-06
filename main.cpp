@@ -13,25 +13,25 @@ struct competidor
   std::string nombre;
   int categoria, subcategoria;
   int tirosCentro, tirosNoCentro;
+  int puntaje;
 };
 
 void asignar(competidor datos[20]); //terminada y chequeada
 void menu(int &opcion); //terminada y chequeada
-void opcion1(competidor datos[20]); //terminada y chequeada
-void opcion2(competidor datos[20], int puntajes[20]); //terminada y chequeada
-void opcion3(); //sin empezar
-void opcion4(competidor datos[20], int puntajes[20]); //terminada y chequeada
-void opcion5(competidor datos[20], int categoriasMatrix[3][3]); //terminada, faltan detalles de formato en la impresion de la matriz
+void opcionMenu1(competidor datos[20]); //terminada y chequeada
+void opcionMenu2(competidor datos[20]); //terminada y chequeada
+void opcionMenu3(competidor datos[20]); //en proceso
+void opcionMenu4(competidor datos[20]); //terminada y chequeada
+void opcionMenu5(competidor datos[20], int categoriasMatrix[3][3]); //terminada y chequeada
 void inicializarMenu(); //sin empezar
 
 int main()
 {
   competidor datos[20];
   int opcion = 1;
-  asignar(datos);
-  int puntajes[20];
   int categoriasMatrix[3][3];
-  opcion5(datos, categoriasMatrix);
+  asignar(datos);
+  opcionMenu4(datos);
 }
 
 void asignar(competidor datos[20])
@@ -40,7 +40,7 @@ void asignar(competidor datos[20])
   std::string tmp;
   if (!inscriptos.is_open())
   {
-    std::cout << "Error al abrir inscriptos.txt" << '\n';
+    std::cout << "Ha ocurrido un error al intentar abrir inscriptos.txt" << '\n';
     exit(EXIT_FAILURE);
   }
   for (int i = 0; i < 8; ++i)
@@ -73,7 +73,7 @@ void menu(int &opcion)
   std::cin >> opcion; 
 }
 
-void opcion1(competidor datos[20])
+void opcionMenu1(competidor datos[20])
 {
   std::cout << '\n';
   std::cout << "Los competidores inscriptos son los siguientes: " << '\n';
@@ -85,7 +85,7 @@ void opcion1(competidor datos[20])
   std::cout << '\n';
 }
 
-void opcion2(competidor datos[20], int puntajes[20])
+void opcionMenu2(competidor datos[20])
 {
   int suma;
   std::cout << '\n';
@@ -93,28 +93,38 @@ void opcion2(competidor datos[20], int puntajes[20])
   {
     suma = (datos[i].tirosCentro * 10) + (datos[i].tirosNoCentro * 5);
     std::cout << "El competidor " << datos[i].nombre << " tiene " << suma << " puntos." << '\n';
-    puntajes[i] = suma;
+    datos[i].puntaje = suma;
+    //puntajes[i] = suma;
     suma = 0;
   }
   std::cout << '\n';
 }
 
-void opcion4(competidor datos[20], int puntajes[20])
+void opcionMenu3(competidor datos[20])
 {
-  int suma;
-  int puntaje;
-  int mayor = puntajes[0]; //es necesario asignarle el primer valor del array a esta variable para que funcione pero no se por que
+  std::ofstream resultados("resultados.txt");
+  if (!resultados)
+  {
+    std::cout << "Ha ocurrido un error al intentar abrir resultados.txt" << '\n';
+    exit(EXIT_FAILURE);
+  }
+  //for int 
+}
+
+void opcionMenu4(competidor datos[20])
+{
+  int suma, puntaje, mayor = 1;
   for (int i = 0; i < 20; ++i)
   {
     suma = (datos[i].tirosCentro * 10) + (datos[i].tirosNoCentro * 5);
-    puntajes[i] = suma;
+    datos[i].puntaje = suma;
     suma = 0;
   }
   for (int j = 0; j < 20; ++j)
   {
-    if (puntajes[j] > mayor)
+    if (datos[j].puntaje > mayor)
     {
-      mayor = puntajes[j];
+      mayor = datos[j].puntaje;
     }
   }
   std::cout << '\n';
@@ -134,21 +144,21 @@ void opcion4(competidor datos[20], int puntajes[20])
     std::cout << '\n';
     for (int k = 0; k < 20; ++k)
     {
-      if (puntajes[k] >= puntaje)
+      if (datos[k].puntaje >= puntaje)
       {
-        std::cout << datos[k].nombre << " con " << puntajes[k] << " puntos." << '\n';
+        std::cout << datos[k].nombre << " con " << datos[k].puntaje << " puntos." << '\n';
       }
     }
   }
   std::cout << '\n';
 }
 
-void opcion5(competidor datos[20], int categoriasMatrix[3][3])
+void opcionMenu5(competidor datos[20], int categoriasMatrix[3][3])
 {
   int tmp0[3] = {0, 0, 0};
   int tmp1[3] = {0, 0, 0};
-  int tmp2[3] = {0, 0, 0}; //un array por cada categoria
-  for (int j = 0; j < 20; ++j) //estos son los 20 inscriptos
+  int tmp2[3] = {0, 0, 0};
+  for (int j = 0; j < 20; ++j)
   {
     if (datos[j].categoria == 0)
     {
@@ -202,12 +212,17 @@ void opcion5(competidor datos[20], int categoriasMatrix[3][3])
     categoriasMatrix[1][n] = tmp1[n];
     categoriasMatrix[2][n] = tmp2[n];
   }
+  std::cout << "La cantidad de competidores por categoria son: \n";
+  std::cout << '\n';
   for (int o = 0; o < 3; ++o)
   {
+    std::cout << "Categoria " << o << ": |";
     for (int p = 0; p < 3; ++p)
     {
       std::cout << " " << categoriasMatrix[o][p] << " ";
     }
+    std::cout << "|";
     std::cout << '\n';
   }
+  std::cout << '\n';
 }
