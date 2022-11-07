@@ -17,6 +17,7 @@ struct competidor
 };
 
 void asignar(competidor datos[20]); //terminada y chequeada
+void calcularPuntaje(competidor datos[20]);
 void menu(int &opcion); //terminada y chequeada
 void opcionMenu1(competidor datos[20]); //terminada y chequeada
 void opcionMenu2(competidor datos[20]); //terminada y chequeada
@@ -31,7 +32,7 @@ int main()
   int opcion = 1;
   int categoriasMatrix[3][3];
   asignar(datos);
-  opcionMenu3(datos);
+  opcionMenu4(datos);
 }
 
 void asignar(competidor datos[20])
@@ -57,6 +58,17 @@ void asignar(competidor datos[20])
     inscriptos >> datos[i].tirosNoCentro;
   }
   inscriptos.close();
+}
+
+void calcularPuntaje(competidor datos[20])
+{
+  int suma;
+  for (int i = 0; i < 20; ++i)
+  {
+    suma = (datos[i].tirosCentro * 10) + (datos[i].tirosNoCentro * 5);
+    datos[i].puntaje = suma;
+    suma = 0;
+  }
 }
 // fin de la primera actividad.
 
@@ -117,12 +129,7 @@ void opcionMenu3(competidor datos[20])
     std::cout << "Ha ocurrido un error al intentar abrir resultados.txt" << '\n';
     exit(EXIT_FAILURE);
   }
-  for (int q = 0; q < 20; ++q)
-  {
-    suma = (datos[q].tirosCentro * 10) + (datos[q].tirosNoCentro * 5);
-    datos[q].puntaje = suma;
-    suma = 0;
-  }
+  calcularPuntaje(datos);
   for (int i = 0; i < 20; ++i)
   {
     copia[i].numeroDeInscripcion = datos[i].numeroDeInscripcion;
@@ -133,11 +140,11 @@ void opcionMenu3(competidor datos[20])
     copia[i].tirosNoCentro = datos[i].tirosNoCentro;
     copia[i].puntaje = datos[i].puntaje;
   }
-  for (int j = 0; j < 20; ++j)
+  for (int j = 0; j < 19; ++j)
   {
-    for (int k = 0; k + 1 < 20 - j; ++k)
+    for (int k = 1; k < 20; ++k)
     {
-      if (copia[k].puntaje > copia[k + 1].puntaje)
+      if (copia[k].puntaje > copia[k - 1].puntaje)
       {
         tmp[k].numeroDeInscripcion = copia[k].numeroDeInscripcion;
         tmp[k].nombre = copia[k].nombre;
@@ -147,27 +154,23 @@ void opcionMenu3(competidor datos[20])
         tmp[k].tirosNoCentro = copia[k].tirosNoCentro;
         tmp[k].puntaje = copia[k].puntaje;
 
-        copia[k].numeroDeInscripcion = copia[k + 1].numeroDeInscripcion;
-        copia[k].nombre = copia[k + 1].nombre;
-        copia[k].categoria = copia[k + 1].categoria;
-        copia[k].subcategoria = copia[k + 1].subcategoria;
-        copia[k].tirosCentro = copia[k + 1].tirosCentro;
-        copia[k].tirosNoCentro = copia[k + 1].tirosNoCentro;
-        copia[k].puntaje = copia[k + 1].puntaje;
+        copia[k].numeroDeInscripcion = copia[k - 1].numeroDeInscripcion;
+        copia[k].nombre = copia[k - 1].nombre;
+        copia[k].categoria = copia[k - 1].categoria;
+        copia[k].subcategoria = copia[k - 1].subcategoria;
+        copia[k].tirosCentro = copia[k - 1].tirosCentro;
+        copia[k].tirosNoCentro = copia[k - 1].tirosNoCentro;
+        copia[k].puntaje = copia[k - 1].puntaje;
 
-        copia[k + 1].numeroDeInscripcion = tmp[k].numeroDeInscripcion;
-        copia[k + 1].nombre = tmp[k].nombre;
-        copia[k + 1].categoria = tmp[k].categoria;
-        copia[k + 1].subcategoria = tmp[k].subcategoria;
-        copia[k + 1].tirosCentro = tmp[k].tirosCentro;
-        copia[k + 1].tirosNoCentro = tmp[k].tirosNoCentro;
-        copia[k + 1].puntaje = tmp[k].puntaje;
+        copia[k - 1].numeroDeInscripcion = tmp[k].numeroDeInscripcion;
+        copia[k - 1].nombre = tmp[k].nombre;
+        copia[k - 1].categoria = tmp[k].categoria;
+        copia[k - 1].subcategoria = tmp[k].subcategoria;
+        copia[k - 1].tirosCentro = tmp[k].tirosCentro;
+        copia[k - 1].tirosNoCentro = tmp[k].tirosNoCentro;
+        copia[k - 1].puntaje = tmp[k].puntaje;
       }
     }
-  }
-  for (int n = 0; n < 20; ++n)
-  {
-    std::cout << copia[n].numeroDeInscripcion << " " <<  copia[n].nombre << " " << copia[n].categoria << " " << copia[n].subcategoria << " " << copia[n].tirosCentro << " " <<  copia[n].tirosNoCentro << " " << copia[n].puntaje << '\n';
   }
 }
 
@@ -176,12 +179,7 @@ void opcionMenu3(competidor datos[20])
 void opcionMenu4(competidor datos[20])
 {
   int suma, puntaje, mayor = 1;
-  for (int i = 0; i < 20; ++i)
-  {
-    suma = (datos[i].tirosCentro * 10) + (datos[i].tirosNoCentro * 5);
-    datos[i].puntaje = suma;
-    suma = 0;
-  }
+  calcularPuntaje(datos);
   for (int j = 0; j < 20; ++j)
   {
     if (datos[j].puntaje > mayor)
