@@ -4,7 +4,7 @@ Alumnos: Corradi Joaquin I, Borletto Martina.
 */
 
 #include <iostream>
-#include <fstream>
+#include <fstream> 
 #include <cstdlib>
 
 struct competidor
@@ -31,7 +31,7 @@ int main()
   int opcion = 1;
   int categoriasMatrix[3][3];
   asignar(datos);
-  opcionMenu4(datos);
+  opcionMenu3(datos);
 }
 
 void asignar(competidor datos[20])
@@ -58,7 +58,9 @@ void asignar(competidor datos[20])
   }
   inscriptos.close();
 }
+// fin de la primera actividad.
 
+//funcion del menú.
 void menu(int &opcion)
 {
   std::cout << '\n';
@@ -73,6 +75,8 @@ void menu(int &opcion)
   std::cin >> opcion; 
 }
 
+//opción 1 del menú.
+
 void opcionMenu1(competidor datos[20])
 {
   std::cout << '\n';
@@ -85,6 +89,8 @@ void opcionMenu1(competidor datos[20])
   std::cout << '\n';
 }
 
+//opcion 2 del menú.
+
 void opcionMenu2(competidor datos[20])
 {
   int suma;
@@ -94,22 +100,78 @@ void opcionMenu2(competidor datos[20])
     suma = (datos[i].tirosCentro * 10) + (datos[i].tirosNoCentro * 5);
     std::cout << "El competidor " << datos[i].nombre << " tiene " << suma << " puntos." << '\n';
     datos[i].puntaje = suma;
-    //puntajes[i] = suma;
     suma = 0;
   }
   std::cout << '\n';
 }
 
+//Opcion 3 del menú.
+
 void opcionMenu3(competidor datos[20])
 {
+  competidor copia[20], tmp[20];
   std::ofstream resultados("resultados.txt");
+  int suma;
   if (!resultados)
   {
     std::cout << "Ha ocurrido un error al intentar abrir resultados.txt" << '\n';
     exit(EXIT_FAILURE);
   }
-  //for int 
+  for (int q = 0; q < 20; ++q)
+  {
+    suma = (datos[q].tirosCentro * 10) + (datos[q].tirosNoCentro * 5);
+    datos[q].puntaje = suma;
+    suma = 0;
+  }
+  for (int i = 0; i < 20; ++i)
+  {
+    copia[i].numeroDeInscripcion = datos[i].numeroDeInscripcion;
+    copia[i].nombre = datos[i].nombre;
+    copia[i].categoria = datos[i].categoria;
+    copia[i].subcategoria = datos[i].subcategoria;
+    copia[i].tirosCentro = datos[i].tirosCentro;
+    copia[i].tirosNoCentro = datos[i].tirosNoCentro;
+    copia[i].puntaje = datos[i].puntaje;
+  }
+  for (int j = 0; j < 20; ++j)
+  {
+    for (int k = 0; k + 1 < 20 - j; ++k)
+    {
+      if (copia[k].puntaje > copia[k + 1].puntaje)
+      {
+        tmp[k].numeroDeInscripcion = copia[k].numeroDeInscripcion;
+        tmp[k].nombre = copia[k].nombre;
+        tmp[k].categoria = copia[k].categoria;
+        tmp[k].subcategoria = copia[k].subcategoria;
+        tmp[k].tirosCentro = copia[k].tirosCentro;
+        tmp[k].tirosNoCentro = copia[k].tirosNoCentro;
+        tmp[k].puntaje = copia[k].puntaje;
+
+        copia[k].numeroDeInscripcion = copia[k + 1].numeroDeInscripcion;
+        copia[k].nombre = copia[k + 1].nombre;
+        copia[k].categoria = copia[k + 1].categoria;
+        copia[k].subcategoria = copia[k + 1].subcategoria;
+        copia[k].tirosCentro = copia[k + 1].tirosCentro;
+        copia[k].tirosNoCentro = copia[k + 1].tirosNoCentro;
+        copia[k].puntaje = copia[k + 1].puntaje;
+
+        copia[k + 1].numeroDeInscripcion = tmp[k].numeroDeInscripcion;
+        copia[k + 1].nombre = tmp[k].nombre;
+        copia[k + 1].categoria = tmp[k].categoria;
+        copia[k + 1].subcategoria = tmp[k].subcategoria;
+        copia[k + 1].tirosCentro = tmp[k].tirosCentro;
+        copia[k + 1].tirosNoCentro = tmp[k].tirosNoCentro;
+        copia[k + 1].puntaje = tmp[k].puntaje;
+      }
+    }
+  }
+  for (int n = 0; n < 20; ++n)
+  {
+    std::cout << copia[n].numeroDeInscripcion << " " <<  copia[n].nombre << " " << copia[n].categoria << " " << copia[n].subcategoria << " " << copia[n].tirosCentro << " " <<  copia[n].tirosNoCentro << " " << copia[n].puntaje << '\n';
+  }
 }
+
+//Opcion 4 del menú.
 
 void opcionMenu4(competidor datos[20])
 {
@@ -152,6 +214,8 @@ void opcionMenu4(competidor datos[20])
   }
   std::cout << '\n';
 }
+
+// Opcion 5 del menú.
 
 void opcionMenu5(competidor datos[20], int categoriasMatrix[3][3])
 {
