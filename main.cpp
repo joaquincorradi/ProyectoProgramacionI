@@ -16,15 +16,15 @@ struct competidor
   int puntaje;
 };
 
-void asignar(competidor datos[20]); //terminada y chequeada
+void asignar(competidor datos[20]); 
 void calcularPuntaje(competidor datos[20]);
-void menu(int &opcion); //terminada y chequeada
-void opcionMenu1(competidor datos[20]); //terminada y chequeada
-void opcionMenu2(competidor datos[20]); //terminada y chequeada
-void opcionMenu3(competidor datos[20]); //en proceso
-void opcionMenu4(competidor datos[20]); //terminada y chequeada
-void opcionMenu5(competidor datos[20], int categoriasMatrix[3][3]); //terminada y chequeada
-void inicializarMenu(); //en proceso
+void menu(int &opcion);
+void opcionMenu1(competidor datos[20]);
+void opcionMenu2(competidor datos[20]);
+void opcionMenu3(competidor datos[20]);
+void opcionMenu4(competidor datos[20]);
+void opcionMenu5(competidor datos[20], int categoriasMatrix[3][3]);
+void inicializarMenu();
 
 int main()
 {
@@ -67,7 +67,6 @@ void calcularPuntaje(competidor datos[20])
   }
 }
 
-//funcion del menú.
 void menu(int &opcion)
 {
   std::cout << '\n';
@@ -82,7 +81,6 @@ void menu(int &opcion)
   std::cin >> opcion; 
 }
 
-//opción 1 del menú.
 void opcionMenu1(competidor datos[20])
 {
   std::cout << '\n';
@@ -95,7 +93,6 @@ void opcionMenu1(competidor datos[20])
   std::cout << '\n';
 }
 
-//opcion 2 del menú.
 void opcionMenu2(competidor datos[20])
 {
   int suma;
@@ -110,7 +107,6 @@ void opcionMenu2(competidor datos[20])
   std::cout << '\n';
 }
 
-//Opcion 3 del menú.
 void opcionMenu3(competidor datos[20])
 {
   competidor copia[20], tmp[20];
@@ -164,31 +160,30 @@ void opcionMenu3(competidor datos[20])
       }
     }
   }
-  resultados << "Numero de inscripto:" << "\t\tNombre:" << "\t\t\t\tCategoria:" << "\t\tSubcategoria:" << "\t\tTirosCentro:" << "\t\tTirosNoCentro:" << "\t\tPuntaje:\n";
-  for (int l = 0; l < 9; ++l)
+  resultados << "Numero de inscripto:" << "\t\tNombre:" << "\t\t\t\tCategoria:" << "\t\t\t\tSubcategoria:" << "\t\tTirosCentro:" << "\t\tTirosNoCentro:" << "\t\tPuntaje:\n";
+  for (int l = 0; l < 20; ++l)
   {
-    if (datos[l].nombre != "Candelaria")
+    if (copia[l].nombre != "Candelaria" && copia[l].nombre != "Paola")
     {
-      resultados << datos[l].numeroDeInscripcion << datos[l].nombre << datos[l].categoria << '\t' << 
-        datos[l].subcategoria << datos[l].tirosCentro << datos[l].tirosNoCentro << datos[l].puntaje << '\n';
+      resultados << copia[l].numeroDeInscripcion << "\t\t\t\t\t\t\t\t\t\t\t\t" << copia[l].nombre << "\t\t\t\t\t\t\t" << copia[l].categoria << "\t\t\t\t\t\t\t\t" << 
+        "\t" << copia[l].subcategoria << "\t\t\t\t\t\t\t" << copia[l].tirosCentro << "\t\t\t\t\t\t\t" << copia[l].tirosNoCentro << "\t\t\t\t\t\t\t" << copia[l].puntaje << '\n';
+    }
+    else if (copia[l].nombre == "Candelaria")
+    {
+      resultados << copia[l].numeroDeInscripcion << "\t\t\t\t\t\t\t\t\t\t\t\t" << copia[l].nombre << "\t\t\t\t\t" << copia[l].categoria << "\t\t\t\t\t\t\t" << 
+        "\t" << copia[l].subcategoria << "\t\t\t\t\t\t\t" << copia[l].tirosCentro << "\t\t\t\t\t\t\t" << copia[l].tirosNoCentro << "\t\t\t\t\t\t\t" << copia[l].puntaje << '\n';
     }
     else
     {
-      resultados << datos[l].numeroDeInscripcion << "\t\t\t\t\t\t\t\t\t\t\t\t"<< datos[l].nombre << datos[l].categoria << datos[l].subcategoria << 
-        datos[l].tirosCentro << datos[l].tirosNoCentro << datos[l].puntaje << '\n';
+      resultados << copia[l].numeroDeInscripcion << "\t\t\t\t\t\t\t\t\t\t\t\t\t" << copia[l].nombre << "\t\t\t\t\t\t\t\t" << copia[l].categoria << "\t\t\t\t\t\t\t\t" << 
+        "\t" << copia[l].subcategoria << "\t\t\t\t\t\t\t\t" << copia[l].tirosCentro << "\t\t\t\t\t\t\t\t" << copia[l].tirosNoCentro << "\t\t\t\t\t\t\t" << copia[l].puntaje << '\n';
     }
-  }
-  for (int m = 10; m < 20; ++m)
-  {
-    resultados << datos[m].numeroDeInscripcion << "\t\t\t\t\t\t\t\t\t\t\t" << datos[m].nombre << '\t' << datos[m].categoria << '\t' << 
-        datos[m].subcategoria << datos[m].tirosCentro << datos[m].tirosNoCentro << datos[m].puntaje << '\n';
   }
   std::cout << '\n';
   std::cout << "Archivo exportado con exito!"; 
   std::cout << '\n';
 }
 
-//Opcion 4 del menú.
 void opcionMenu4(competidor datos[20])
 {
   int suma, puntaje, mayor = 1;
@@ -226,7 +221,6 @@ void opcionMenu4(competidor datos[20])
   std::cout << '\n';
 }
 
-// Opcion 5 del menú.
 void opcionMenu5(competidor datos[20], int categoriasMatrix[3][3])
 {
   int tmp0[3] = {0, 0, 0};
@@ -312,7 +306,8 @@ void inicializarMenu()
   while (seleccionUs == 'S' || seleccionUs == 's')
   {
     menu(opcion);
-    //system("cls||clear");  //windows o unix
+    std::cout << std::flush;
+    system("cls||clear");
     switch (opcion)
     {
     case 1:
