@@ -6,6 +6,7 @@ Alumnos: Corradi Joaquin I, Borletto Martina.
 #include <iostream>
 #include <fstream> 
 #include <cstdlib>
+#include <iomanip>
 
 struct competidor
 {
@@ -24,15 +25,11 @@ void opcionMenu2(competidor datos[20]); //terminada y chequeada
 void opcionMenu3(competidor datos[20]); //en proceso
 void opcionMenu4(competidor datos[20]); //terminada y chequeada
 void opcionMenu5(competidor datos[20], int categoriasMatrix[3][3]); //terminada y chequeada
-void inicializarMenu(); //sin empezar
+void inicializarMenu(); //en proceso
 
 int main()
 {
-  competidor datos[20];
-  int opcion = 1;
-  int categoriasMatrix[3][3];
-  asignar(datos);
-  opcionMenu4(datos);
+  inicializarMenu();
 }
 
 void asignar(competidor datos[20])
@@ -70,7 +67,6 @@ void calcularPuntaje(competidor datos[20])
     suma = 0;
   }
 }
-// fin de la primera actividad.
 
 //funcion del menú.
 void menu(int &opcion)
@@ -88,21 +84,19 @@ void menu(int &opcion)
 }
 
 //opción 1 del menú.
-
 void opcionMenu1(competidor datos[20])
 {
   std::cout << '\n';
-  std::cout << "Los competidores inscriptos son los siguientes: " << '\n';
+  std::cout << " Los competidores inscriptos son los siguientes: " << '\n';
   std::cout << '\n';
   for (int i = 0; i < 20; ++i)
   {
-    std::cout << datos[i].nombre << " con numero de inscripcion " << datos[i].numeroDeInscripcion << '\n';
+    std::cout << " " << datos[i].nombre << " con numero de inscripcion " << datos[i].numeroDeInscripcion << '\n';
   }
   std::cout << '\n';
 }
 
 //opcion 2 del menú.
-
 void opcionMenu2(competidor datos[20])
 {
   int suma;
@@ -110,7 +104,7 @@ void opcionMenu2(competidor datos[20])
   for (int i = 0; i < 20; ++i)
   {
     suma = (datos[i].tirosCentro * 10) + (datos[i].tirosNoCentro * 5);
-    std::cout << "El competidor " << datos[i].nombre << " tiene " << suma << " puntos." << '\n';
+    std::cout << " El competidor " << datos[i].nombre << " tiene " << suma << " puntos." << '\n';
     datos[i].puntaje = suma;
     suma = 0;
   }
@@ -118,7 +112,6 @@ void opcionMenu2(competidor datos[20])
 }
 
 //Opcion 3 del menú.
-
 void opcionMenu3(competidor datos[20])
 {
   competidor copia[20], tmp[20];
@@ -172,10 +165,31 @@ void opcionMenu3(competidor datos[20])
       }
     }
   }
+  resultados << "Numero de inscripto:" << "\t\tNombre:" << "\t\t\t\tCategoria:" << "\t\tSubcategoria:" << "\t\tTirosCentro:" << "\t\tTirosNoCentro:" << "\t\tPuntaje:\n";
+  for (int l = 0; l < 9; ++l)
+  {
+    if (datos[l].nombre != "Candelaria")
+    {
+      resultados << datos[l].numeroDeInscripcion << std::setw(40) << std::left << datos[l].nombre << datos[l].categoria << '\t' << 
+        datos[l].subcategoria << datos[l].tirosCentro << datos[l].tirosNoCentro << datos[l].puntaje << '\n';
+    }
+    else
+    {
+      resultados << datos[l].numeroDeInscripcion << "\t\t\t\t\t\t\t\t\t\t\t\t"<< datos[l].nombre << datos[l].categoria << datos[l].subcategoria << 
+        datos[l].tirosCentro << datos[l].tirosNoCentro << datos[l].puntaje << '\n';
+    }
+  }
+  for (int m = 10; m < 20; ++m)
+  {
+    resultados << datos[m].numeroDeInscripcion << "\t\t\t\t\t\t\t\t\t\t\t" << datos[m].nombre << '\t' << datos[m].categoria << '\t' << 
+        datos[m].subcategoria << datos[m].tirosCentro << datos[m].tirosNoCentro << datos[m].puntaje << '\n';
+  }
+  std::cout << '\n';
+  std::cout << "Archivo exportado con exito!"; 
+  std::cout << '\n';
 }
 
 //Opcion 4 del menú.
-
 void opcionMenu4(competidor datos[20])
 {
   int suma, puntaje, mayor = 1;
@@ -214,7 +228,6 @@ void opcionMenu4(competidor datos[20])
 }
 
 // Opcion 5 del menú.
-
 void opcionMenu5(competidor datos[20], int categoriasMatrix[3][3])
 {
   int tmp0[3] = {0, 0, 0};
@@ -274,6 +287,7 @@ void opcionMenu5(competidor datos[20], int categoriasMatrix[3][3])
     categoriasMatrix[1][n] = tmp1[n];
     categoriasMatrix[2][n] = tmp2[n];
   }
+  std::cout << '\n';
   std::cout << "La cantidad de competidores por categoria son: \n";
   std::cout << '\n';
   for (int o = 0; o < 3; ++o)
@@ -287,4 +301,61 @@ void opcionMenu5(competidor datos[20], int categoriasMatrix[3][3])
     std::cout << '\n';
   }
   std::cout << '\n';
+}
+
+void inicializarMenu()
+{
+  competidor datos[20];
+  int opcion = 1, categoriasMatrix[3][3];
+  bool caso6 = false;
+  char seleccionUs = 's';
+  asignar(datos);
+  while (seleccionUs == 'S' || seleccionUs == 's')
+  {
+    menu(opcion);
+    system("cls||clear");  //windows o unix
+    switch (opcion)
+    {
+    case 1:
+      opcionMenu1(datos);
+      break;
+    
+    case 2:
+      opcionMenu2(datos);
+      break;
+
+    case 3:
+      opcionMenu3(datos);
+      break;
+
+    case 4:
+      opcionMenu4(datos);
+      break;
+
+    case 5:
+      opcionMenu5(datos, categoriasMatrix);
+      break;
+    
+    case 6:
+      caso6 = true;
+      break;
+
+    default:
+      std::cout << "Opcion invalida\n";
+      break;
+    }
+    if (!caso6)
+    {
+      std::cout << "¿Desea volver al menu principal? [S/n]: ";
+      std::cin >> seleccionUs;
+      /*if (seleccionUs == 's' || seleccionUs == 'S')
+      {
+        system("cls||clear");
+      }
+    }
+    else
+    {
+      seleccionUs = 'n';
+    }*/
+    }
 }

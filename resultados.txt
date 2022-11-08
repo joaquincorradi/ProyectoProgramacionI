@@ -1,0 +1,20 @@
+Numero de inscripto:		Nombre:				Categoria:		Subcategoria:		TirosCentro:		TirosNoCentro:		Puntaje:
+1Pedro                                   2	13975
+2Juan                                    0	02335
+3Anibal                                  0	22545
+4Susana                                  1	02860
+5												Candelaria028080
+6Paola                                   0	298130
+7Cesar                                   0	24145
+8Alberto                                 0	27385
+9Ricardo                                 1	25365
+11											Adabel	0	178110
+12											Cecilia	0	13555
+13											Armando	2	2810130
+14											Sergio	1	22125
+15											Jose	0	0015
+16											Juana	0	01745
+17											Ana	1	10525
+18											Ornella	1	16060
+19											Javier	0	187115
+20											Fabian	2	2109145
