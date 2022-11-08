@@ -6,7 +6,6 @@ Alumnos: Corradi Joaquin I, Borletto Martina.
 #include <iostream>
 #include <fstream> 
 #include <cstdlib>
-#include <iomanip>
 
 struct competidor
 {
@@ -170,7 +169,7 @@ void opcionMenu3(competidor datos[20])
   {
     if (datos[l].nombre != "Candelaria")
     {
-      resultados << datos[l].numeroDeInscripcion << std::setw(40) << std::left << datos[l].nombre << datos[l].categoria << '\t' << 
+      resultados << datos[l].numeroDeInscripcion << datos[l].nombre << datos[l].categoria << '\t' << 
         datos[l].subcategoria << datos[l].tirosCentro << datos[l].tirosNoCentro << datos[l].puntaje << '\n';
     }
     else
@@ -313,7 +312,7 @@ void inicializarMenu()
   while (seleccionUs == 'S' || seleccionUs == 's')
   {
     menu(opcion);
-    system("cls||clear");  //windows o unix
+    //system("cls||clear");  //windows o unix
     switch (opcion)
     {
     case 1:
@@ -348,7 +347,7 @@ void inicializarMenu()
     {
       std::cout << "¿Desea volver al menu principal? [S/n]: ";
       std::cin >> seleccionUs;
-      /*if (seleccionUs == 's' || seleccionUs == 'S')
+      if (seleccionUs == 's' || seleccionUs == 'S')
       {
         system("cls||clear");
       }
@@ -356,6 +355,6 @@ void inicializarMenu()
     else
     {
       seleccionUs = 'n';
-    }*/
     }
+  }
 }
