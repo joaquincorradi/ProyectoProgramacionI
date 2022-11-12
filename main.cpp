@@ -28,7 +28,11 @@ void inicializarMenu();
 
 int main()
 {
-  inicializarMenu();
+  // inicializarMenu();
+  competidor datos[20];
+  int opcion = 1, categoriasMatrix[3][3] = {0,0,0,0,0,0,0,0,0};
+  asignar(datos);
+  opcionMenu5(datos, categoriasMatrix);
 }
 
 void asignar(competidor datos[20])
@@ -223,62 +227,9 @@ void opcionMenu4(competidor datos[20])
 
 void opcionMenu5(competidor datos[20], int categoriasMatrix[3][3])
 {
-  int tmp0[3] = {0, 0, 0};
-  int tmp1[3] = {0, 0, 0};
-  int tmp2[3] = {0, 0, 0};
-  for (int j = 0; j < 20; ++j)
+  for (int i = 0; i < 20; ++i)
   {
-    if (datos[j].categoria == 0)
-    {
-      if (datos[j].subcategoria == 0)
-      {
-        ++tmp0[0];
-      }
-      else if (datos[j].subcategoria == 1)
-      {
-        ++tmp0[1];
-      }
-      else if (datos[j].subcategoria == 2)
-      {
-        ++tmp0[2];
-      }
-    }
-    else if (datos[j].categoria == 1)
-    {
-      if (datos[j].subcategoria == 0)
-      {
-        ++tmp1[0];
-      }
-      else if (datos[j].subcategoria == 1)
-      {
-        ++tmp1[1];
-      }
-      else if (datos[j].subcategoria == 2)
-      {
-        ++tmp1[2];
-      }
-    }
-    else if (datos[j].categoria == 2)
-    {
-      if (datos[j].subcategoria == 0)
-      {
-        ++tmp2[0];
-      }
-      else if (datos[j].subcategoria == 1)
-      {
-        ++tmp2[1];
-      }
-      else if (datos[j].subcategoria == 2)
-      {
-        ++tmp2[2];
-      }
-    }
-  }
-  for (int n = 0; n < 3; ++n)
-  {
-    categoriasMatrix[0][n] = tmp0[n];
-    categoriasMatrix[1][n] = tmp1[n];
-    categoriasMatrix[2][n] = tmp2[n];
+    ++categoriasMatrix[datos[i].categoria][datos[i].subcategoria];
   }
   std::cout << '\n';
   std::cout << "La cantidad de competidores por categoria son: \n";
