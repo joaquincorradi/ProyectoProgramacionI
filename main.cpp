@@ -23,16 +23,12 @@ void opcionMenu1(competidor datos[20]);
 void opcionMenu2(competidor datos[20]);
 void opcionMenu3(competidor datos[20]);
 void opcionMenu4(competidor datos[20]);
-void opcionMenu5(competidor datos[20], int categoriasMatrix[3][3]);
+void opcionMenu5(competidor datos[20]);
 void inicializarMenu();
 
 int main()
 {
-  // inicializarMenu();
-  competidor datos[20];
-  int opcion = 1, categoriasMatrix[3][3] = {0,0,0,0,0,0,0,0,0};
-  asignar(datos);
-  opcionMenu5(datos, categoriasMatrix);
+  inicializarMenu();
 }
 
 void asignar(competidor datos[20])
@@ -225,21 +221,22 @@ void opcionMenu4(competidor datos[20])
   std::cout << '\n';
 }
 
-void opcionMenu5(competidor datos[20], int categoriasMatrix[3][3])
+void opcionMenu5(competidor datos[20])
 {
-  for (int i = 0; i < 20; ++i)
+  int categoriasMatrix[3][3] = {0,0,0,0,0,0,0,0,0};
+  for (int k = 0; k < 20; ++k)
   {
-    ++categoriasMatrix[datos[i].categoria][datos[i].subcategoria];
+    ++categoriasMatrix[datos[k].categoria][datos[k].subcategoria];
   }
   std::cout << '\n';
   std::cout << "La cantidad de competidores por categoria son: \n";
   std::cout << '\n';
-  for (int o = 0; o < 3; ++o)
+  for (int i = 0; i < 3; ++i)
   {
-    std::cout << "Categoria " << o << ": |";
-    for (int p = 0; p < 3; ++p)
+    std::cout << "Categoria " << i << ": |";
+    for (int j = 0; j < 3; ++j)
     {
-      std::cout << " " << categoriasMatrix[o][p] << " ";
+      std::cout << " " << categoriasMatrix[i][j] << " ";
     }
     std::cout << "|";
     std::cout << '\n';
@@ -264,27 +261,21 @@ void inicializarMenu()
     case 1:
       opcionMenu1(datos);
       break;
-    
     case 2:
       opcionMenu2(datos);
       break;
-
     case 3:
       opcionMenu3(datos);
       break;
-
     case 4:
       opcionMenu4(datos);
       break;
-
     case 5:
-      opcionMenu5(datos, categoriasMatrix);
+      opcionMenu5(datos);
       break;
-    
     case 6:
       caso6 = true;
       break;
-
     default:
       std::cout << "Opcion invalida\n";
       break;
